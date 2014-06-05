@@ -18,11 +18,11 @@ var makeQueue = function(){
   someInstance.dequeue = function(){
     if (size > 0) {
       size--;
+      var res = storage[first];
+      delete storage[first];
+      first++;
+      return res;
     }
-    var res = storage[first];
-    delete storage[first];
-    first++;
-    return res;
   };
 
   someInstance.size = function(){

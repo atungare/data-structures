@@ -19,11 +19,11 @@ queueMethods.enqueue = function(val) {
 queueMethods.dequeue = function() {
   if (this.len > 0) {
     this.len--;
+    var res = this.storage[this.first];
+    delete this.storage[this.first];
+    this.first++;
+    return res;
   }
-  var res = this.storage[this.first];
-  delete this.storage[this.first];
-  this.first++;
-  return res;
 };
 queueMethods.size = function() {
   return this.len;

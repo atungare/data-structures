@@ -1,24 +1,25 @@
 var stackMethods = {
   push : function(val) {
-    this.storage[this.len] = val;
-    this.len++;
+    this._storage[this._len] = val;
+    this._len++;
   },
   pop : function() {
-    if (this.len > 0) {
-      this.len--;
+    if (this._len > 0) {
+      this._len--;
+      var res = this._storage[this._len];
+      delete this._storage[this._len];
+      return res;
     }
-    var res = this.storage[this.len];
-    delete this.storage[this.len];
-    return res;
+
   },
   size : function() {
-    return this.len;
+    return this._len;
   }
 };
 
 var makeStack = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
-  var obj = _.extend({len:0, storage:{}}, stackMethods);
+  var obj = _.extend({_len:0, _storage:{}}, stackMethods);
   return obj;
 };

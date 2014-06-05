@@ -9,11 +9,11 @@ stackMethods.push = function(val) {
 stackMethods.pop = function() {
   if (this.len > 0) {
     this.len--;
+    var res = this.storage[this.len];
+    delete this.storage[this.len];
+    return res;
   }
 
-  var res = this.storage[this.len];
-  delete this.storage[this.len];
-  return res;
 };
 
 stackMethods.size = function() {
