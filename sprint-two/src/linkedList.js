@@ -6,7 +6,7 @@ var makeLinkedList = function(){
   list.addToTail = function(value){
     var newNode = makeNode(value);
 
-    if(list.tail !== null) {
+    if(list.tail) {
       list.tail.next = newNode;
     } else {
       list.head = newNode;
@@ -16,7 +16,7 @@ var makeLinkedList = function(){
   };
 
   list.removeHead = function(){
-    if(list.head !== null) {
+    if(list.head) {
       var res = list.head.value;
       list.head = list.head.next;
       return res;
@@ -30,9 +30,7 @@ var makeLinkedList = function(){
 
     while((current !== list.tail) && !found) {
       current = current.next;
-      if (current.value === target) {
-        found = true;
-      }
+      found = (current.value === target);
     }
 
     return found;
