@@ -52,6 +52,10 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
   }
 };
 
+Graph.prototype.forEachNode = function(callback) {
+  _.each(this.nodes, callback);
+};
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
