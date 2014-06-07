@@ -61,7 +61,6 @@ HashTable.prototype.remove = function(k){
   this._count--;
 
   if (this._over && (this._count < (1/4) * this._limit)) {
-    debugger;
     this.rehash(0.5);
   }
 
