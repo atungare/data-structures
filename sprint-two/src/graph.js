@@ -4,7 +4,9 @@ var Graph = function(){
 
 Graph.prototype.addNode = function(newNode, toNode){
   var keys = Object.keys(this.nodes);
+
   this.nodes[newNode] = {};
+
   if (toNode) {
     this.addEdge(newNode, toNode);
   }
@@ -15,23 +17,20 @@ Graph.prototype.addNode = function(newNode, toNode){
 };
 
 Graph.prototype.contains = function(node){
-  if (this.nodes[node]) {
-    return true;
-  }else{
-    return false;
-  }
+  return (this.nodes[node] !== undefined);
 };
 
 Graph.prototype.removeNode = function(node){
-  delete this.nodes[node];
+  if(this.nodes[node]) {
+    _.each(this.nodes[node], function(val, key) {
+      delete this.nodes[key][node];
+    });
+    delete this.nodes[node];
+  }
 };
 
 Graph.prototype.getEdge = function(fromNode, toNode){
-  if (this.nodes[fromNode][toNode] === true) {
-    return true;
-  } else {
-    return false;
-  }
+  return (this.nodes[fromNode][toNode] === true);
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode){
@@ -43,11 +42,10 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
   delete this.nodes[fromNode][toNode];
   delete this.nodes[toNode][fromNode];
 
-  if (Object.keys(this.nodes[fromNode]).length === 0) {
+  if (_.isEmpty(this.nodes[fromNode])) {
     delete this.nodes[fromNode];
   }
-
-  if (Object.keys(this.nodes[toNode]).length === 0) {
+  if (_.isEmpty(this.nodes[toNode])) {
     delete this.nodes[toNode];
   }
 };
